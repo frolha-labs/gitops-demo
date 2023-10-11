@@ -1,0 +1,14 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev-project-1
+spec:
+  finalizers:
+    - kubernetes
+---
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: dev-project-1-argo
+  namespace: dev-project-1
+---
