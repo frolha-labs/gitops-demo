@@ -1,3 +1,4 @@
+# make a new project
 kind: Namespace
 apiVersion: v1
 metadata:
@@ -6,6 +7,22 @@ spec:
   finalizers:
     - kubernetes
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev-project-1-gitops
+  namespace: dev-project-1
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: ./
+    repoURL: 'https://github.com/frolha-labs/dev-project-1-gitops.git'
+    targetRevision: HEAD
+  syncPolicy: {}
+---
+# Install ArgoCD for the project
 apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
 metadata:
